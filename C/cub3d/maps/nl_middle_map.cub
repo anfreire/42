@@ -1,0 +1,11 @@
+NO ./32textures/bricks.xpm
+SO ./32textures/bricks.xpm
+WE ./32textures/tnt.xpm
+EA ./32textures/tnt.xpm
+F 220,100,0
+C 225,30,0
+ 11111111111
+1000000000001
+
+100000E000111
+ 11111111111

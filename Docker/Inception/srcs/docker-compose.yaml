@@ -1,0 +1,69 @@
+version: '3.3'
+
+volumes:
+  wp-volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/anfreire/data/wordpress
+
+  mariadb-volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/anfreire/data/mariadb
+
+
+networks:
+  inception:
+    driver: bridge
+
+services:
+  nginx:
+    build: nginx
+    container_name: nginx
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
+    volumes:
+      - ./nginx/volumes/http.d/:/etc/nginx/http.d/
+      - ./nginx/volumes/ssl:/etc/nginx/ssl/
+      - wp-volume:/var/www/
+    restart: always
+    networks:
+      - inception
+  
+  mariadb:
+    container_name: mariadb
+    build:
+      context: mariadb
+      args:
+        - DB_NAME=$DB_NAME
+        - DB_USER=$DB_USER
+        - DB_PASSWORD=$DB_PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    networks:
+      - inception
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build:
+      context: wordpress
+      args:
+        - DB_NAME=$DB_NAME
+        - DB_USER=$DB_USER
+        - DB_PASSWORD=$DB_PASSWORD
+    restart: always
+    ports:
+      - "9000:9000"
+    networks:
+      - inception
+    volumes:
+      - wp-volume:/var/www/

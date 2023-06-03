@@ -1,0 +1,6 @@
+NO ./32textures/bricks.xpm
+SO ./32textures/dirt.xpm
+WE ./32textures/gold.xpm
+EA ./32textures/stone.xpm
+F 220,100,0
+C 225,30,0
