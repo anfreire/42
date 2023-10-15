@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <title/>
+  <g transform="matrix(14.171993, 0, 0, 8.982573, -97.96003, 50.812569)" style="">
+    <g>
+      <path class="cls-1" d="M18,42V24h6V44H20A2,2,0,0,1,18,42Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+      <line class="cls-1" x1="18" x2="24" y1="34" y2="34" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M24,44V24h6V42a2,2,0,0,1-2,2Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+      <line class="cls-1" x1="24" x2="30" y1="34" y2="34" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    </g>
+    <rect class="cls-1" height="10" width="12" x="18" y="10" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    <path class="cls-1" d="M24,47a3,3,0,0,1,6,0Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    <path class="cls-1" d="M18,47a3,3,0,0,1,6,0Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    <g>
+      <path class="cls-1" d="M13,12V26l2.5,2H18V10H15A2,2,0,0,0,13,12Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+      <line class="cls-1" x1="13" x2="18" y1="19" y2="19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M35,12V26l-2.5,2H30V10h3A2,2,0,0,1,35,12Z" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+      <line class="cls-1" x1="35" x2="30" y1="19" y2="19" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    </g>
+    <path class="cls-1" d="M27,9.97736a5.00005,5.00005,0,1,0-6,0" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+    <path class="cls-1" d="M26,10.26663v2.54689A2.04847,2.04847,0,0,1,24,15a2,2,0,0,1-2-2V10.26562" style="fill: none; stroke-linecap: round; stroke-linejoin: round; stroke: rgb(0, 0, 0); stroke-width: 1.72752px;"/>
+  </g>
+  <ellipse cx="217.381" cy="93.439" rx="10.196" ry="8.189" style="stroke-width: 20px;"/>
+  <ellipse cx="264.965" cy="93.439" rx="10.196" ry="8.189" style="stroke-width: 20px;"/>
+  <path d="M 213.983 109.816 L 268.363 109.816 L 268.363 118.004 L 213.983 118.004 L 213.983 109.816 Z" style="stroke-width: 20px;"/>
+  <rect x="236.17" y="32.639" width="9.24" height="21.13" style="stroke: rgb(0, 0, 0); stroke-width: 20px;"/>
+  <ellipse style="paint-order: fill; stroke: rgb(0, 0, 0); stroke-width: 20px;" cx="240.601" cy="32.74" rx="15.593" ry="10.159"/>
+</svg>

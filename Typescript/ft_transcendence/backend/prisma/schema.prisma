@@ -1,0 +1,190 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+}
+
+enum two_factor_auth {
+  NONE
+  SMS
+  GOOGLE
+}
+
+enum user_state {
+  ONLINE
+  OFFLINE
+  IN_GAME
+}
+
+enum channel_type {
+  PUBLIC
+  PRIVATE
+  PROTECTED
+}
+
+model Achievements {
+  id Int @id @default(autoincrement())
+
+  // All games
+  winFirstGame        Boolean @default(false) //* Done
+  winThreeTimes       Boolean @default(false) //* Done
+  // Friend games
+  winAgainstFriend    Boolean @default(false) //* Done
+  // Bot games
+  winAgainstBotEasy   Boolean @default(false) //* Done
+  winAgainstBotMedium Boolean @default(false) //* Done
+  winAgainstBotHard   Boolean @default(false) //* Done
+  // Leaderboard
+  firstInLeaderboard  Boolean @default(false) // ! Missing leaderboard
+  // Game invites
+  inviteGameInChat    Boolean @default(false) //* Done
+  inviteGameInChannel Boolean @default(false) //* Done
+
+  users User[]
+}
+
+enum color {
+  primary
+  secondary
+  error
+  warning
+  success
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  studentId String @unique
+  username  String @unique
+  socket    String @unique
+
+  twoFA  String
+  avatar String
+  status user_state @default(ONLINE)
+
+  gmail String? @unique
+  phone String? @unique
+
+  color color @default(primary)
+
+  friends     User[] @relation("Friends")
+  friendsWith User[] @relation("Friends")
+
+  friendRequests     User[] @relation("FriendRequests")
+  friendRequestsSent User[] @relation("FriendRequests")
+
+  blocked   User[] @relation("Blocked")
+  blockedBy User[] @relation("Blocked")
+
+  // CHANNELS && CHATS
+  messages         Message[] @relation("UserMessages")
+  lastSeenMessages Message[] @relation("UserLastSeenMessages")
+
+  // CHANNELS
+  channels   Channel[] @relation("ChannelUsers")
+  ownerOf    Channel[] @relation("ChannelOwner")
+  adminOf    Channel[] @relation("ChannelAdmins")
+  bannedFrom Channel[] @relation("ChannelBanned")
+  mutedFrom  Channel[] @relation("ChannelMuted")
+
+  // CHATS
+  chats Chat[] @relation("ChatUsers")
+
+  // GAMES
+  games  Game[] @relation("GamePlayers")
+  wins   Game[] @relation("GameWinner")
+  losses Game[] @relation("GameLoser")
+
+  // ACHIEVEMENTS
+  achievements   Achievements @relation(fields: [achievementsId], references: [id])
+  achievementsId Int
+}
+
+model Channel {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  name     String       @unique
+  avatar   String
+  type     channel_type @default(PUBLIC)
+  password String?
+
+  users User[] @relation("ChannelUsers")
+
+  owner   User @relation("ChannelOwner", fields: [ownerId], references: [id])
+  ownerId Int
+
+  admins User[] @relation("ChannelAdmins")
+
+  banned User[] @relation("ChannelBanned")
+
+  muted User[] @relation("ChannelMuted")
+
+  messages Message[] @relation("ChannelMessages")
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+
+  name String @unique
+
+  users User[] @relation("ChatUsers")
+
+  messages Message[] @relation("ChatMessages")
+}
+
+model Message {
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now())
+
+  content String
+
+  // OR FROM CHAT
+  chat      Chat?    @relation("ChatMessages", fields: [chatId], references: [id])
+  chatId    Int?
+  // OR FROM CHANNEL
+  channel   Channel? @relation("ChannelMessages", fields: [channelId], references: [id])
+  channelId Int?
+
+  sender   User @relation("UserMessages", fields: [senderId], references: [id])
+  senderId Int
+
+  isGame Boolean @default(false)
+
+  lastSeenBy User[] @relation("UserLastSeenMessages")
+}
+
+enum game_state {
+  PLAYING
+  FINISHED
+}
+
+enum game_mode {
+  CLASSIC
+  CUSTOM
+}
+
+model Game {
+  id Int @id @default(autoincrement())
+
+  state game_state @default(PLAYING)
+
+  mode game_mode @default(CLASSIC)
+
+  players User[] @relation("GamePlayers") // 2 players
+
+  points Int[]
+
+  winner   User? @relation("GameWinner", fields: [winnerId], references: [id])
+  winnerId Int?
+  loser    User? @relation("GameLoser", fields: [loserId], references: [id])
+  loserId  Int?
+}
