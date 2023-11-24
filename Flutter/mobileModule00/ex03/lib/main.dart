@@ -56,7 +56,6 @@ class _MyAppState extends State<MyApp> {
           result = resultNumber.toString();
         }
       } catch (e) {
-        debugPrint(e.toString());
         result = 'Error';
       }
     });
